@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from main.models import shorted_urls
 from main.forms import FormClass
 from main.short import short
-# Create your views here.
+# Create your views here
+
+def create_url(request, token):
+        url = shorted_urls.objects.filter(short_url=token)[0]
+        return redirect(url.long_url)
+
 def home(request):
     FormObj = FormClass(request.POST)
     x = ""
@@ -12,5 +17,10 @@ def home(request):
             x=short().create_token()
             Url.short_url = x
             Url.save()
-    context={"form":FormClass, "x": x }
+        else:
+                FormObj = FormClass()
+                x="Invalid URL"
+    context={"form":FormObj , "x": x}
     return render(request,"base.html",context)
+
+

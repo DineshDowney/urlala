@@ -1,6 +1,6 @@
 beautifulsoup4==4.6.1
 bs4==0.0.1
-certifi==2018.4.16
+certifi==2022.12.7
 Django==2.0.8
 Pillow==5.2.0
 pytz==2018.5
